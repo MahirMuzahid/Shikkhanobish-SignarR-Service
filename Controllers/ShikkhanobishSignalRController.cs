@@ -67,5 +67,19 @@ namespace Shikkhanobish_SignarR_Service.Controllers
 
             return Ok("ok");
         }
+        [HttpPost("studentTuitionResponse")]
+        public async Task<IActionResult> studentTuitionResponse(int teacherID, int studentID, bool studentTuitionResponse)
+        {
+            await _hubContext.Clients.All.SendAsync("studentTuitionResponse", teacherID, studentID, studentTuitionResponse);
+
+            return Ok("ok");
+        }
+        [HttpPost("sumbitQs")]
+        public async Task<IActionResult> sumbitQs(int teacherID, int qsID, string errorTxt)
+        {
+            await _hubContext.Clients.All.SendAsync("sumbitQs", teacherID, qsID, errorTxt);
+
+            return Ok("ok");
+        }
     }
 }
