@@ -68,9 +68,9 @@ namespace Shikkhanobish_SignarR_Service.Controllers
             return Ok("ok");
         }
         [HttpPost("studentTuitionResponse")]
-        public async Task<IActionResult> studentTuitionResponse(int teacherID, int studentID, bool studentTuitionResponse)
+        public async Task<IActionResult> studentTuitionResponse(int teacherID, int studentID, bool studentTuitionResponse, bool hidestVideo)
         {
-            await _hubContext.Clients.All.SendAsync("studentTuitionResponse", teacherID, studentID, studentTuitionResponse);
+            await _hubContext.Clients.All.SendAsync("studentTuitionResponse", teacherID, studentID, studentTuitionResponse, hidestVideo);
 
             return Ok("ok");
         }
