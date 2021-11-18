@@ -81,5 +81,12 @@ namespace Shikkhanobish_SignarR_Service.Controllers
 
             return Ok("ok");
         }
+        [HttpPost("realTimetuitionNotiofication")]
+        public async Task<IActionResult> realTimetuitionNotiofication(string tuitionid)
+        {
+            await _hubContext.Clients.All.SendAsync("realTimetuitionNotiofication", tuitionid);
+
+            return Ok("ok");
+        }
     }
 }
