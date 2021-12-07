@@ -25,6 +25,31 @@ namespace Shikkhanobish_SignarR_Service.Controllers
             return Ok("ok");
         }
 
+        [HttpPost("CallTeacherForTuition")]
+        public async Task<IActionResult> CallTeacherForTuition(int teacherID, string tuitionID, string name, int studentID)
+        {
+            await _hubContext.Clients.All.SendAsync("CallTeacherForTuition", teacherID, tuitionID,  name, studentID);
+
+            return Ok("ok");
+        }
+
+        [HttpPost("TuitionRequestNotification")]
+        public async Task<IActionResult> TuitionRequestNotification(int teacherID, string notificationID, string tuitionLogID, int studentID)
+        {
+            await _hubContext.Clients.All.SendAsync("TuitionRequestNotification", teacherID, notificationID, tuitionLogID, studentID);
+
+            return Ok("ok");
+        }
+
+        [HttpPost("PostAnswerNotification")]
+        public async Task<IActionResult> PostAnswerNotification(int teacherID, string notificationID, string postID, string answerID , int studentID)
+        {
+            await _hubContext.Clients.All.SendAsync("PostAnswerNotification", teacherID, notificationID, postID, answerID, studentID);
+
+            return Ok("ok");
+        }
+
+
         [HttpPost("StudentPaymentStatus")]
         public async Task<IActionResult> StudentPaymentStatus(int studentID, bool successFullPayment, string amount, string response, string paymentID, string trxID, string cardID, string cardType)
         {
@@ -85,6 +110,13 @@ namespace Shikkhanobish_SignarR_Service.Controllers
         public async Task<IActionResult> realTimetuitionNotiofication(string tuitionid)
         {
             await _hubContext.Clients.All.SendAsync("realTimetuitionNotiofication", tuitionid);
+
+            return Ok("ok"); 
+        }
+        [HttpPost("acceptTuitionNotification")]
+        public async Task<IActionResult> acceptTuitionNotification(string tuitionid, int studentID)
+        {
+            await _hubContext.Clients.All.SendAsync("acceptTuitionNotification", tuitionid, studentID);
 
             return Ok("ok");
         }
